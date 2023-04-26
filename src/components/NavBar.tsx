@@ -8,7 +8,7 @@ function NavBar() {
       <div>
         <ul>
           <li>
-            <Link to={'/'}>Overview</Link>
+            <Link to={"/"}>Overview</Link>
           </li>
           <li>
             <Link to={"/expenses"}>Expenses</Link>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import NavBar from './components/NavBar';
 import Home from './components/Home';
@@ -9,14 +9,14 @@ import Expenses from './components/Expenses';
 function App() {
   return (
     <div className="App">
-      <NavBar />
-      <BrowserRouter>
+      <Router>
+        <NavBar />
         <Routes>
-          <Route path="/" Component={Home}/>
-          <Route path="/expenses" Component={Income}/>
-          <Route path="/income" Component={Expenses}/>
+          <Route path="/" element={<Home />} />
+          <Route path="/expenses" element={<Income />} />
+          <Route path="/income" element={<Expenses />} />
         </Routes>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 }
