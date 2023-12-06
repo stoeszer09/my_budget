@@ -12,13 +12,17 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { useAuth0 } from '@auth0/auth0-react';
 
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = ['Overview', 'Income', 'Expenses'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+
+  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { logout } = useAuth0();
+  const { loginWithRedirect } = useAuth0();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -55,7 +59,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Home Accounting
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -147,11 +151,15 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+              {isAuthenticated && user ? (
+                <MenuItem onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
+                  <Typography textAlign="center">Log Out</Typography>
                 </MenuItem>
-              ))}
+              ) : (
+                <MenuItem onClick={() => loginWithRedirect()}>
+                  <Typography textAlign="center">Log In</Typography>
+                </MenuItem>
+              )}
             </Menu>
           </Box>
         </Toolbar>
