@@ -5,13 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Auth0Provider } from '@auth0/auth0-react';
 
+const domain = process.env.REACT_APP_AUTH0_DOMAIN as string;
+const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID as string;
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <Auth0Provider
-  domain="dev-j-ihoupd.us.auth0.com"
-  clientId='1fKsYny4zg229o09oxIPuu461C0mPEO3'
+  domain={domain}
+  clientId={clientId}
   authorizationParams={{
     redirect_uri: window.location.origin
   }}

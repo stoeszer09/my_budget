@@ -115,7 +115,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Home Accounting
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -151,15 +151,16 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {isAuthenticated && user ? (
+              {isAuthenticated &&
                 <MenuItem onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
                   <Typography textAlign="center">Log Out</Typography>
                 </MenuItem>
-              ) : (
+              }
+              {(isLoading || !user) &&
                 <MenuItem onClick={() => loginWithRedirect()}>
                   <Typography textAlign="center">Log In</Typography>
                 </MenuItem>
-              )}
+              }
             </Menu>
           </Box>
         </Toolbar>
