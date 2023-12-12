@@ -21,20 +21,35 @@ function Profile() {
   
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    console.log(backend_URL + '/users/monthly-budgets')
     try {
-      const response = await fetch(backend_URL + '/users/monthly-budgets', {
+      // TO DO: change to update the user name
+      const userResponse = await fetch(backend_URL + '/users', {
         method: 'PUT', 
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, budget, user }),
+        body: JSON.stringify({ name, user }),
       });
-      if (!response.ok) {
+      // TO DO: separate fetch to update budget
+      const budgetResponse = await fetch(backend_URL + '/users/monthly-budgets', {
+        method: 'PUT', 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ budget, user }),
+      });
+
+
+      if (!userResponse.ok) {
         throw new Error('Failed to update profile');
       }
-      const data = await response.json();
-      console.log(data)
+      if (!budgetResponse.ok) {
+        throw new Error('Failed to update budget');
+      }
+      const budgetData = await budgetResponse.json();
+      console.log('budget', budgetData)
+      const userData = await userResponse.json();
+      console.log('user', userData)
     } catch (error) {
       console.error('Error updating profile:', error);
     }

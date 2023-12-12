@@ -1,7 +1,7 @@
 import { useAuth0, User } from "@auth0/auth0-react";
 import { useEffect } from "react";
 
-const backendURL = process.env.BACKEND_URL as string;
+const backendURL = process.env.REACT_APP_BACKEND_URL as string;
 
 function Home() {
   const { user, isAuthenticated, isLoading } = useAuth0<User>();
@@ -9,7 +9,7 @@ function Home() {
   useEffect(() => {
     const fetchData = async () => {
       if(user?.nickname && user?.sub) {
-        const response = await fetch('http://localhost:5001/users', {
+        const response = await fetch(backendURL + '/users', {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
