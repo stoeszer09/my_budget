@@ -3,6 +3,7 @@ import TextField from '@mui/material/TextField';
 import { useAuth0, User } from "@auth0/auth0-react";
 import { useState } from 'react';
 import { Button, FormControl, Input, InputAdornment, InputLabel } from '@mui/material';
+import AddCategory from '../components/AddCategory';
 
 const backend_URL = process.env.REACT_APP_BACKEND_URL as string
 
@@ -80,7 +81,17 @@ function Profile() {
                 label="Name"
                 variant="standard"
               />
-              <br />
+            </Box>
+          </FormControl>
+          <FormControl fullWidth sx={{ m: 1 }} variant="standard">
+            <Box
+              component="form"
+              sx={{
+                '& > :not(style)': { m: 1, width: '25ch' },
+              }}
+              noValidate
+              autoComplete="off"
+            >
               <InputLabel htmlFor="standard-adornment-amount">
                 Amount
               </InputLabel>
@@ -92,13 +103,28 @@ function Profile() {
                 }
               />
             </Box>
-            {user.nickname !== name || budget !== budget ? (
-              <Button onClick={handleSubmit} sx={{ width: 25 }} variant="contained">Submit</Button>
-            ) : (
-              <Button onClick={handleSubmit} sx={{ width: 25 }} variant="outlined">Submit</Button>
-            )}
           </FormControl>
+
+          {user.nickname !== name || budget !== budget ? (
+            <Button
+              onClick={handleSubmit}
+              sx={{ width: 25 }}
+              variant="contained"
+            >
+              Submit
+            </Button>
+          ) : (
+            <Button
+              onClick={handleSubmit}
+              sx={{ width: 25 }}
+              variant="outlined"
+            >
+              Submit
+            </Button>
+          )}
+
           {budget}
+          <AddCategory user={user} />
         </div>
       )}
     </div>
