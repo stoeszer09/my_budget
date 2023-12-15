@@ -1,5 +1,6 @@
 import { useAuth0, User } from "@auth0/auth0-react";
 import { useEffect } from "react";
+import AddExpense from "../components/AddExpense";
 
 const backendURL = process.env.REACT_APP_BACKEND_URL as string;
 
@@ -29,6 +30,9 @@ function Home() {
   return (
     <div>
       Home
+      {user && 
+      <AddExpense user={user} />
+      }
     </div>
   );
 }
