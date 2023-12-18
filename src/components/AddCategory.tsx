@@ -75,6 +75,7 @@ export default function AddCategory({ user }: { user: User }) {
       }
       const data = await response.json();
       console.log('category: ', data);
+      setOpen(false)
     } catch (error) {
       console.error('Error adding category:', error);
     }

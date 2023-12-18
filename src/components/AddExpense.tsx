@@ -51,6 +51,7 @@ export default function AddExpense({ user }: { user: User }) {
   const handleClose = () => setOpen(false);
 
   const handleCategoryChange = (e: SelectChangeEvent<string>) => {
+    console.log(e.target.value)
     setCategory(e.target.value as string);
   };
 
@@ -146,7 +147,7 @@ export default function AddExpense({ user }: { user: User }) {
             >
               {categoriesList ? (categoriesList.map((category, indx) => {
                 return (
-                  <MenuItem value={`${category}`} key={indx}>{category.name}</MenuItem>
+                  <MenuItem value={`${category.name}`} key={indx}>{category.name}</MenuItem>
                 )
               })) : ''}
             </Select>
@@ -155,7 +156,7 @@ export default function AddExpense({ user }: { user: User }) {
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DemoContainer components={['DatePicker']}>
                 <DatePicker
-                  label="Controlled picker"
+                  label="Date"
                   value={transactionDate}
                   onChange={(newValue) => setTransactionDate(newValue)}
                 />
