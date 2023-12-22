@@ -51,7 +51,6 @@ export default function AddExpense({ user }: { user: User }) {
   const handleClose = () => setOpen(false);
 
   const handleCategoryChange = (e: SelectChangeEvent<string>) => {
-    console.log(e.target.value)
     setCategory(e.target.value as string);
   };
 
@@ -90,10 +89,10 @@ export default function AddExpense({ user }: { user: User }) {
         throw new Error('Failed to add transaction');
       }
       const data = await response.json();
-      console.log('transaction: ', data);
     } catch (error) {
       console.error('Error adding transaction:', error);
     }
+    handleClose();
   };
 
   useEffect(() => {
@@ -106,7 +105,6 @@ export default function AddExpense({ user }: { user: User }) {
         body: JSON.stringify({user})
       })
       const data = await response.json();
-      console.log('category list response: ', data)
       setCategoriesList(data.categoryList);
     }
     fetchData();

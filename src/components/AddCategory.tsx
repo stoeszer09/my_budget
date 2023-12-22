@@ -6,16 +6,8 @@ import {
   Input,
   InputAdornment,
   InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
 } from '@mui/material';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import TextField from '@mui/material/TextField';
-import dayjs, { Dayjs } from 'dayjs';
 import { useState } from 'react';
 import { type User } from '@auth0/auth0-react';
 
@@ -74,11 +66,10 @@ export default function AddCategory({ user }: { user: User }) {
         throw new Error('Failed to add category');
       }
       const data = await response.json();
-      console.log('category: ', data);
-      setOpen(false)
     } catch (error) {
       console.error('Error adding category:', error);
     }
+    handleClose()
   };
 
   return (
