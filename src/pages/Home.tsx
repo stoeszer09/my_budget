@@ -14,7 +14,7 @@ const backendURL = process.env.REACT_APP_BACKEND_URL as string;
 type Expenses = {
   expense: number,
   categoryId: number,
-  budget: number,
+  categoryBudget: number,
   categoryName: string
 }
 
@@ -51,8 +51,8 @@ function Home() {
     <div>
       Home
       {user && <AddExpense user={user} />}
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <TableContainer component={Paper} sx={{ maxWidth: 1/2 }} >
+        <Table sx={{ maxWidth: 1 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>Category</TableCell>
@@ -70,9 +70,9 @@ function Home() {
                 <TableCell component="th" scope="row">
                   {expense.categoryName}
                 </TableCell>
-                <TableCell align="right">{expense.budget.toString()}</TableCell>
+                <TableCell align="right">{expense.categoryBudget.toString()}</TableCell>
                 <TableCell align="right">{expense.expense.toString()}</TableCell>
-                <TableCell align="right">{(expense.budget - expense.expense)}</TableCell>
+                <TableCell align="right">{(expense.categoryBudget - expense.expense)}</TableCell>
               </TableRow>
             ))}
           </TableBody>
