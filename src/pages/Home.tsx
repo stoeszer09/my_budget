@@ -36,9 +36,8 @@ function Home() {
         })
       }
     const fetchData = async (auth : string) => {
-      const response = await fetch(backendURL + '/transactions/users/' + auth)
+      const response = await fetch(backendURL + '/transactions/budget/users/' + auth)
       const data = await response.json();
-      console.log('the data: ', data.expenses)
       setExpenses([...data.expenses])
     }
     if(user?.nickname && user?.sub) {
